@@ -2,70 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'IRANYekanMedium';
+  src: url('/IRANYEKANMEDIUM.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   
   body {
-    @apply text-white font-professional;
+    @apply text-gray-800 font-professional;
     min-height: 100vh;
     overflow-x: hidden;
-    background-image: url('/Background.jpg');
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
     background-attachment: fixed;
-    background-repeat: no-repeat;
   }
   
-  /* Add a dark overlay to maintain readability */
-  body::before {
+  /* Preload Persian font */
+  body::after {
     content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
     z-index: -1;
+    background-image: url('/IRANYEKANMEDIUM.TTF');
   }
 }
 
 @layer components {
   .noir-button {
-    @apply bg-noir-accent text-noir-darker font-calligraphy text-xl px-8 py-4 rounded-full 
+    @apply bg-gradient-to-r from-blue-500 to-purple-600 text-white font-calligraphy text-xl px-8 py-4 rounded-full 
            shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105
            hover:brightness-110 cursor-pointer select-none;
   }
   
   .noir-card {
-    @apply bg-gradient-to-br from-noir-dark/80 to-noir-darker/80 backdrop-blur-sm
-           border border-noir-primary/30 rounded-xl p-6 shadow-2xl
-           hover:border-noir-accent/50 transition-all duration-300;
+    @apply bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-6 shadow-lg
+           hover:border-blue-300 hover:shadow-xl transition-all duration-300;
   }
   
   .noir-nav-link {
-    @apply text-white/80 hover:text-noir-accent transition-colors duration-300
+    @apply text-gray-700 hover:text-blue-600 transition-colors duration-300
            font-professional font-medium tracking-wide;
   }
   
   .north-star {
-    @apply text-noir-accent animate-pulse;
+    @apply text-blue-500 animate-pulse;
     font-size: 0.8em;
     margin-left: 0.2em;
+  }
+  
+  .persian-text {
+    font-family: 'IRANYekanMedium', 'Tahoma', 'Arial', sans-serif !important;
+    font-weight: normal;
+    line-height: 1.6;
+    direction: rtl;
+    text-align: right;
+  }
+  
+  /* Override default fonts for Persian text elements */
+  h1.persian-text, h2.persian-text, h3.persian-text, h4.persian-text, h5.persian-text, h6.persian-text,
+  p.persian-text, span.persian-text, div.persian-text, button.persian-text, a.persian-text {
+    font-family: 'IRANYekanMedium', 'Tahoma', 'Arial', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+  }
+  
+  /* Ensure Persian text in buttons and inputs */
+  button.persian-text, input.persian-text, textarea.persian-text {
+    font-family: 'IRANYekanMedium', 'Tahoma', 'Arial', sans-serif !important;
   }
 }
 
 @layer utilities {
   .text-shadow {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   }
   
   .glow {
-    box-shadow: 0 0 20px rgba(241, 169, 9, 0.3);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   }
   
   .glow:hover {
-    box-shadow: 0 0 30px rgba(241, 169, 9, 0.5);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+  }
+  
+  .line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
